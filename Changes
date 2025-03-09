@@ -2,6 +2,9 @@ Revision history for Redis
 
 {{$NEXT}}
 
+0.1.5  2025-03-09T14:52:42-04:00
+    - Update tests for CI compatibilty, fix dependencies
+
 0.1.4  2025-03-09T13:57:19-04:00
     - Add locking around exec_command, for thread-safety
 
