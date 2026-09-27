@@ -6,19 +6,28 @@
   ],
   "build-depends": [
   ],
-  "depends": [
-    "File::Which"
-  ],
+  "depends": {
+    "runtime": {
+      "requires": [
+        "File::Which"
+      ]
+    }
+  },
   "description": "a Raku binding for Redis",
   "license": "Artistic-2.0",
   "name": "Redis",
-  "perl": "6.d",
   "provides": {
     "Redis": "lib/Redis.rakumod"
   },
+  "raku": "6.d",
   "resources": [
   ],
   "source-url": "https://github.com/raku-community-modules/Redis.git",
+  "support": {
+    "bugtracker": "https://github.com/raku-community-modules/Redis/issues",
+    "email": "community@raku.org",
+    "source": "https://github.com/raku-community-modules/Redis.git"
+  },
   "tags": [
     "REDIS",
     "NOSQL"

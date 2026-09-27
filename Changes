@@ -1,6 +1,9 @@
 Revision history for Redis
 
 {{$NEXT}}
+    - Add support for large responses, bduggan++
+    - Modernize META
+    - Update copyright year
 
 0.1.5  2025-03-09T14:52:42-04:00
     - Update tests for CI compatibilty, fix dependencies
