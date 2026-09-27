@@ -1,6 +1,8 @@
 Revision history for Redis
 
 {{$NEXT}}
+
+0.1.6  2026-09-27T19:50:54+02:00
     - Add support for large responses, bduggan++
     - Modernize META
     - Update copyright year
