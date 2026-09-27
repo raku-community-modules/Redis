@@ -138,10 +138,12 @@ my sub find-first-line-end(Blob $input --> Int:D) {
 }
 
 method !get-first-line(Blob $buf is copy) {
-    unless $buf.defined && $buf.bytes > 0 {
-        $buf = $.conn.recv(:bin);
-    }
+    $buf = Buf[uint8].new unless $buf.?bytes;
     my $first-line-end = find-first-line-end($buf);
+    while $first-line-end >= $buf.bytes {
+        $buf ~= $.conn.recv(:bin) // die "failed to get more bytes";
+        $first-line-end = find-first-line-end($buf);
+    }
     my $first-line = $buf.subbuf(0, $first-line-end);
     my $remainder-length = $buf.bytes - ( $first-line-end + 2 );
     my $remainder = $buf.subbuf($first-line-end + 2, $remainder-length);
@@ -175,10 +177,9 @@ method !read_response(Blob:D $remainder is rw) {
         if $length == -1 {
             return Nil;
         }
-        my $needed = $length - $remainder.bytes;
         $response = $remainder;
-        if $needed > 0 {
-            $response.append: $.conn.read($needed + 2).subbuf(0, $needed);
+        while $response.bytes < $length + 2 {
+            $response.append: $.conn.recv(:bin);
         }
         $remainder = $response.subbuf($length + 2, *);
         $response = $response.subbuf(0, $length);
